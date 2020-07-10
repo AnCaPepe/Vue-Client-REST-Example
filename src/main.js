@@ -1,10 +1,14 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import VueResource from 'vue-resource'
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
+Vue.use( VueResource )
+
+Vue.prototype.$userName = ''
 
 new Vue({
   router,
-  render: h => h(App)
-}).$mount("#app");
+  render: h => h(App),
+}).$mount('#app')

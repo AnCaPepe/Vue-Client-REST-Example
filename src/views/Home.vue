@@ -1,18 +1,41 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <Header text="Project School 2020" />
+    <h2>Please log in</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td>User Name</td>
+          <td><input type="text" v-model="userName" /></td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td><input type="text" v-model="password" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-input" @click="logIn()">Log in</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Header from '@/components/Header'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    HelloWorld
-  }
-};
+    Header,
+  },
+  data() {
+    return {
+      userName: '',
+      password: '',
+    }
+  },
+  methods: {
+    logIn() {
+      this.$router.push( { path: 'teachers' } )
+    },
+  },
+}
 </script>
