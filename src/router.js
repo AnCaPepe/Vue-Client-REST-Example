@@ -20,9 +20,24 @@ const routes = [
     component: () => import('@/views/Professors.vue')
   },
   {
-    path: '/classes',
-    name: 'Classes',
-    component: () => import('@/views/Classes.vue')
+    path: '/courses',
+    name: 'Courses',
+    component: () => import('@/views/Courses.vue')
+  },
+  {
+    path: '/students/:id',
+    name: 'StudentDetail',
+    component: () => import('@/views/StudentDetail.vue')
+  },
+  {
+    path: '/professors/:id',
+    name: 'ProfessorDetail',
+    component: () => import('@/views/ProfessorDetail.vue')
+  },
+  {
+    path: '/courses/:id',
+    name: 'CourseDetail',
+    component: () => import('@/views/CourseDetail.vue')
   },
   {
     path: '/about',
@@ -30,8 +45,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '@/views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
   }
 ]
 

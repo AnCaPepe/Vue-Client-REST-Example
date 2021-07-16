@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DBTable title="Professors" path="professors" v-bind:layout="fields" />
+    <DBTable title="Professors" path="professors" :fields="fields" />
   </div>
 </template>
 
@@ -9,7 +9,6 @@
 import DBTable from '@/components/DBTable.vue'
 
 export default {
-  name: 'Professors',
   data() {
     return {
       fields: ['name', 'age']

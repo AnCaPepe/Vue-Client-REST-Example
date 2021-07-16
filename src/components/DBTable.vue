@@ -1,82 +1,73 @@
 <template>
   <div class="table-db">
     <h1>{{ title }}</h1>
-    <table>
-      <thead>
-        <th>Teste</th>
-        <th v-for="column in layout" v-bind:key="column">{{ column }}</th>
-      </thead>
-      <tbody>
-        <tr v-for="row in entries" v-bind:key="row">
-          <td>Teste</td>
-          <td v-for="item in row" v-bind:key="item">{{ item }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <span v-for="field in fields" :key="field">
+      {{ field }}: <input type="text" :name="field" v-model="inputs[field]" />
+    </span>
+    <button id="btn-add" @click="addEntry()">Add</button>
+    <br />
+    <Table :title="title" :fields="fields" :entries="entries" :path="path" />
   </div>
 </template>
 
 <script>
+import Table from '@/components/Table.vue'
+
 export default {
   name: 'DBTable',
   props: {
     title: String,
-    layout: Array,
+    fields: Array,
     path: String
+  },
+  components: {
+    Table
   },
   data() {
     return {
-      entries: Array
+      entries: [],
+      inputs: {}
+    }
+  },
+  methods: {
+    getEntries() {
+      this.entries = []
+      // Fetch database
+      this.$http
+        .get(`http://localhost:5000/${this.path}`)
+        .then((data) => data.json())
+        .then((results) => {
+          for (let row of results) {
+            console.log(row)
+            var entry = { id: row.id }
+            for (let field of this.fields) entry[field] = row[field]
+            this.entries.push(entry)
+          }
+        })
+      console.log(this.entries)
+    },
+    addEntry() {
+      for (let field of this.fields) console.log(this.inputs[field])
+      console.log('Added!')
+    },
+    deleteEntry(index) {
+      console.log(index)
     }
   },
   created() {
-    // Fetch database
-    // this.$http.get( "http://localhost:5000/students" )
-    // .then( data => data.json() )
-    // .then( results => {} )
-
-    // } )
-    this.entries = [
-      { name: 'John', age: 25 },
-      { name: 'Peter', age: 23 }
-    ]
+    this.getEntries()
+    for (let field of this.fields) this.inputs[field] = ''
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+span {
+  margin: 10px;
+  text-transform: capitalize;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-table {
-  margin: 0px;
-  padding: 0px;
-  list-style-type: none;
-  width: 100%;
-}
-table tr td {
-  padding: 20px;
-  font-size: 1.3em;
-  background-color: #e0edf4;
-  margin-bottom: 2px;
-  color: #3e5252;
-}
-table thead th {
-  background-color: rgb(184, 208, 216) !important;
-  font-size: 1.2em;
-  padding: 10px 0px;
-  text-align: center !important;
+#btn-add {
+  margin-left: 20px;
+  margin-bottom: 10px;
 }
 </style>

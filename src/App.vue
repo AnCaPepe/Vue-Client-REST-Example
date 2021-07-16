@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/students">Students</router-link> |
       <router-link to="/professors">Professors</router-link> |
-      <router-link to="/classes">Classes</router-link> |
+      <router-link to="/courses">Courses</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
@@ -48,10 +48,13 @@ button {
   border: 1px solid black;
   border-radius: 5px;
   font-weight: bold;
-  border-bottom: 3px solid black;
+  /* border-bottom: 3px solid black; */
+  background-color: dimgray;
+  color: white;
 }
 button:hover {
-  margin-top: 2px;
-  border-bottom: 1px solid black;
+  /* margin-top: 2px; */
+  /* border-bottom: 1px solid black; */
+  text-shadow: 1px 1px black;
 }
 </style>

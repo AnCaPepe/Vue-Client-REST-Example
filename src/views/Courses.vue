@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DBTable title="Classes" path="classes" v-bind:layout="fields" />
+    <DBTable title="Courses" path="courses" :fields="fields" />
   </div>
 </template>
 
